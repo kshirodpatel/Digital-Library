@@ -8,4 +8,4 @@ def register(request):
 
 def login(request):
     context = {}
-    return render(request, 'accounts/login', context)
+    return render(request, 'login.html', context)
