@@ -119,25 +119,29 @@
   <div class="max-w-7xl mx-auto px-4">
     <div class="flex justify-between items-end mb-8">
       <div>
-        <h2 class="text-3xl font-bold">New Arrivals</h2>
-        <p class="text-slate-600">The latest additions to our collection.</p>
+        <h2 class="text-3xl font-bold">Trending Now!!</h2>
+        <p class="text-slate-600">All trending books from our collection.</p>
       </div>
     </div>
 
     <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
+      {% for book in books %}
       <div class="group">
-        <div
-          class="aspect-[2/3] bg-slate-200 rounded-lg mb-3 overflow-hidden shadow-sm group-hover:shadow-lg transition"
-        >
-          <img
-            src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=400"
-            alt="Book Cover"
-            class="w-full h-full object-cover group-hover:scale-105 transition duration-300"
-          />
-        </div>
-        <h4 class="font-bold text-sm truncate">The Midnight Library</h4>
-        <p class="text-xs text-slate-500">Matt Haig</p>
+        <a href="/book/{{book.isbn}}">
+          <div
+            class="aspect-[2/3] bg-slate-200 rounded-lg mb-3 overflow-hidden shadow-sm group-hover:shadow-lg transition"
+          >
+            <img
+              src="{{book.cover_image_url}}"
+              alt="Book Cover"
+              class="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+            />
+          </div>
+        </a>
+        <h4 class="font-bold text-sm truncate">{{book.title}}</h4>
+        <p class="text-xs text-slate-500">{{book.author}}</p>
       </div>
+      {% endfor %}
     </div>
   </div>
 </section>
