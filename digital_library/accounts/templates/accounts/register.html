@@ -1,11 +1,141 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <h3>Register</h3>
-  </body>
-</html>
+{% extends 'base.html' %} {% block content %}
+<div class="bg-slate-100 h-screen flex items-center justify-center p-4">
+  <div
+    class="max-w-4xl w-full bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row min-h-[600px]"
+  >
+    <div
+      class="md:w-1/2 relative bg-indigo-900 text-white p-12 flex flex-col justify-between overflow-hidden"
+    >
+      <div class="absolute inset-0 opacity-40">
+        <img
+          src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&q=80"
+          alt="Library"
+          class="w-full h-full object-cover"
+        />
+      </div>
+      <div class="relative z-10">
+        <div class="flex items-center gap-2 mb-8">
+          <div class="bg-white p-1.5 rounded-lg text-indigo-600">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+              />
+            </svg>
+          </div>
+          <span class="text-2xl font-bold tracking-tight">BookShelf</span>
+        </div>
+        <h2 class="text-4xl font-bold leading-tight">
+          Unlock a world of knowledge.
+        </h2>
+        <p class="mt-4 text-indigo-100">
+          Join thousands of readers and access our entire digital and physical
+          collection.
+        </p>
+      </div>
+      <div class="relative z-10 text-sm text-indigo-200">
+        &copy; 2026 BookShelf Public Library
+      </div>
+    </div>
+
+    <div class="md:w-1/2 p-8 md:p-12 self-center">
+      <div id="register-form" class="">
+        <h3 class="text-2xl font-bold text-slate-800 mb-2">Create Account</h3>
+        <p class="text-slate-500 mb-8 text-sm">
+          Get your digital library card in seconds.
+        </p>
+
+        <form class="space-y-4" method="post">
+          {% csrf_token %} 
+          {% for field in form %}
+          {% if field.name == 'first_name'  %}
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-slate-700 mb-1"
+                >{{field.label|title}}</label
+              >
+              <input
+                type="text"
+                name="firstname"
+                class="w-full px-4 py-2.5 rounded-lg border border-slate-200 outline-none focus:ring-2 focus:ring-indigo-500"
+                placeholder="John"
+              />
+            </div>
+            {% endif %}
+            {% if field.name == 'last_name' %}
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1"
+              >{{field.label|title}}</label
+            >
+            <input
+              type="text"
+              name="{{field.name}}"
+              class="w-full px-4 py-2.5 rounded-lg border border-slate-200 outline-none focus:ring-2 focus:ring-indigo-500"
+              placeholder="Doe"
+            />
+          </div>
+          </div>
+          {% endif %}
+          
+          {% if field.name not in "first_name last_name" %}
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1"
+              >{{field.label|title}}</label
+            >
+            {% if field.name == 'email' %}
+            <input
+              type="email"
+              name="{{field.name}}"
+              class="w-full px-4 py-2.5 rounded-lg border border-slate-200 outline-none focus:ring-2 focus:ring-indigo-500"
+              placeholder="johndoe@example.com"
+            />
+            {% else %}
+            <input
+              type="password"
+              name="{{field.name}}"
+              class="w-full px-4 py-2.5 rounded-lg border border-slate-200 outline-none focus:ring-2 focus:ring-indigo-500"
+              placeholder="••••••••"
+            />
+            {% endif %}
+            
+          </div>
+          {% endif %}
+          {% endfor %}
+          <button
+            class="w-full bg-indigo-600 text-white py-3 rounded-lg font-semibold hover:bg-indigo-700 transition shadow-lg shadow-indigo-200"
+          >
+            Create Account
+          </button>
+        </form>
+
+        <p class="mt-8 text-center text-sm text-slate-600">
+          Already have a card?
+          <a
+            href="/accounts/login"
+            class="text-indigo-600 font-bold hover:underline"
+          >
+            Log in
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleAuth() {
+    // const login = document.getElementById("login-form");
+    // const register = document.getElementById("register-form");
+    // login.classList.toggle("hidden");
+    // register.classList.toggle("hidden");
+  }
+</script>
+{% endblock %}
